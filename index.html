@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Альтернативные крестики-нолики</title>
+	<style>
+		html, body, div, span, applet, object, iframe,
+		h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+		a, abbr, acronym, address, big, cite, code,
+		del, dfn, em, img, ins, kbd, q, s, samp,
+		small, strike, strong, sub, sup, tt, var,
+		b, u, i, center,
+		dl, dt, dd, ol, ul, li,
+		fieldset, form, label, legend,
+		table, caption, tbody, tfoot, thead, tr, th, td,
+		article, aside, canvas, details, embed, 
+		figure, figcaption, footer, header, hgroup, 
+		menu, nav, output, ruby, section, summary,
+		time, mark, audio, video {
+			margin: 0;
+			padding: 0;
+			border: 0;
+			font-size: 100%;
+			font: inherit;
+			vertical-align: baseline;
+		}
+	/**/
+		#fuckingbug {
+			position: absolute;
+			top: 35px;
+			right: 10px;
+			bottom: 10px;
+			width: 200px;
+			min-height: 50%;
+			border: 1px #666 solid;
+		}
+
+		#console {
+			width: 99%;
+			height: 99%;
+			margin: 0; /* don't want to add to container size */
+			border: 0; /* don't want to add to container size */
+		}
+
+		#cli :first-child {
+			position: absolute;
+			top: 10px;
+			width: 170px;
+			right: 38px;
+			height: 17px;
+			border: 1px #666 solid;
+		}
+
+		#cli :last-child {
+			position: absolute;
+			top: 10px;
+			width: 25px;
+			right: 10px;
+			height: 21px;
+			border: none;
+			background: #DDD;
+		}
+
+		table td {width: 32px; height: 34px; border: 1px #666 solid;}
+		table.active {background: #CFC;}
+		#field1 {position: absolute; top: 10px; left: 10px;}
+		#field2 {position: absolute; top: 10px; left: 130px;}
+		#field3 {position: absolute; top: 10px; left: 250px;}
+		#field4 {position: absolute; top: 130px; left: 10px;}
+		#field5 {position: absolute; top: 130px; left: 130px;}
+		#field6 {position: absolute; top: 130px; left: 250px;}
+		#field7 {position: absolute; top: 250px; left: 10px;}
+		#field8 {position: absolute; top: 250px; left: 130px;}
+		#field9 {position: absolute; top: 250px; left: 250px;}
+
+		.cx {background: url(http://habrastorage.org/storage2/928/1fb/656/9281fb65664866e6eda6d5b3146e7d00.png);}
+		.co {background: url(http://habrastorage.org/storage2/21e/00f/47f/21e00f47f7499173c9d9cef0248ab690.png);}
+	</style>
+</head>
+<body>
+
+	<div id="fuckingbug"><textarea id="console"></textarea></div>
+
+	<table id="field1">
+		<tr>
+			<td id="cell1"></td>
+			<td id="cell2"></td>
+			<td id="cell3"></td>
+		</tr>
+		<tr>
+			<td id="cell4"></td>
+			<td id="cell5"></td>
+			<td id="cell6"></td>
+		</tr>
+		<tr>
+			<td id="cell7"></td>
+			<td id="cell8"></td>
+			<td id="cell9"></td>
+		</tr>
+	</table>
+	<table id="field2">
+		<tr>
+			<td id="cell10"></td>
+			<td id="cell11"></td>
+			<td id="cell12"></td>
+		</tr>
+		<tr>
+			<td id="cell13"></td>
+			<td id="cell14"></td>
+			<td id="cell15"></td>
+		</tr>
+		<tr>
+			<td id="cell16"></td>
+			<td id="cell17"></td>
+			<td id="cell18"></td>
+		</tr>
+	</table>
+	<table id="field3">
+		<tr>
+			<td id="cell19"></td>
+			<td id="cell20"></td>
+			<td id="cell21"></td>
+		</tr>
+		<tr>
+			<td id="cell22"></td>
+			<td id="cell23"></td>
+			<td id="cell24"></td>
+		</tr>
+		<tr>
+			<td id="cell25"></td>
+			<td id="cell26"></td>
+			<td id="cell27"></td>
+		</tr>
+	</table>
+	<table id="field4">
+		<tr>
+			<td id="cell28"></td>
+			<td id="cell29"></td>
+			<td id="cell30"></td>
+		</tr>
+		<tr>
+			<td id="cell31"></td>
+			<td id="cell32"></td>
+			<td id="cell33"></td>
+		</tr>
+		<tr>
+			<td id="cell34"></td>
+			<td id="cell35"></td>
+			<td id="cell36"></td>
+		</tr>
+	</table>
+	<table id="field5">
+		<tr>
+			<td id="cell37"></td>
+			<td id="cell38"></td>
+			<td id="cell39"></td>
+		</tr>
+		<tr>
+			<td id="cell40"></td>
+			<td id="cell41"></td>
+			<td id="cell42"></td>
+		</tr>
+		<tr>
+			<td id="cell43"></td>
+			<td id="cell44"></td>
+			<td id="cell45"></td>
+		</tr>
+	</table>
+	<table id="field6">
+		<tr>
+			<td id="cell46"></td>
+			<td id="cell47"></td>
+			<td id="cell48"></td>
+		</tr>
+		<tr>
+			<td id="cell49"></td>
+			<td id="cell50"></td>
+			<td id="cell51"></td>
+		</tr>
+		<tr>
+			<td id="cell52"></td>
+			<td id="cell53"></td>
+			<td id="cell54"></td>
+		</tr>
+	</table>
+	<table id="field7">
+		<tr>
+			<td id="cell55"></td>
+			<td id="cell56"></td>
+			<td id="cell57"></td>
+		</tr>
+		<tr>
+			<td id="cell58"></td>
+			<td id="cell59"></td>
+			<td id="cell60"></td>
+		</tr>
+		<tr>
+			<td id="cell61"></td>
+			<td id="cell62"></td>
+			<td id="cell63"></td>
+		</tr>
+	</table>
+	<table id="field8">
+		<tr>
+			<td id="cell64"></td>
+			<td id="cell65"></td>
+			<td id="cell66"></td>
+		</tr>
+		<tr>
+			<td id="cell67"></td>
+			<td id="cell68"></td>
+			<td id="cell69"></td>
+		</tr>
+		<tr>
+			<td id="cell70"></td>
+			<td id="cell71"></td>
+			<td id="cell72"></td>
+		</tr>
+	</table>
+	<table id="field9">
+		<tr>
+			<td id="cell73"></td>
+			<td id="cell74"></td>
+			<td id="cell75"></td>
+		</tr>
+		<tr>
+			<td id="cell76"></td>
+			<td id="cell77"></td>
+			<td id="cell78"></td>
+		</tr>
+		<tr>
+			<td id="cell79"></td>
+			<td id="cell80"></td>
+			<td id="cell81"></td>
+		</tr>
+	</table>
+	
+	<script src="http://82.196.5.189/socket.io/socket.io.js"></script>
+	<script>
+		function log(str) {
+			var c=document.getElementById('console')
+			c.innerHTML+=str
+			c.scrollTop = c.scrollHeight;
+		}
+
+		function size(obj) {
+		    var size = 0, key;
+		    for (key in obj) {
+		        if (obj.hasOwnProperty(key)) size++;
+		    }
+		    return size;
+		};
+
+		function rnd(min, max){
+			return Math.floor(Math.random()*(max-min+1)) + min;
+		}
+
+		function randomName(){
+			//var vocals = 'aeiouyh' + 'aeiou' + 'aeiou';
+			//var cons = 'bcdfghjklmnpqrstvwxz' + 'bcdfgjklmnprstvw' + 'bcdfgjklmnprst';
+			var vocals = "уеыаоэяию"+"оаеи"
+			var cons = "йцкнгшщзхъфвпрлджчсмтб"+"кнгвпрлдмтб"+"йцкнгшщзхъфвпрлджчсмтб"+"кнгвпрлдмтб"
+			var allchars = vocals + cons
+
+			var length = rnd(3,7)
+
+			var consnum = 0;
+			var name = ""
+			
+			for (var i = 0; i < length; i++) {
+				if (consnum == 2 || rnd(1,4)==1) {
+					touse = vocals;
+					consnum = 0;
+				}
+				else 
+					touse = allchars;
+
+				c = touse.charAt(rnd(0, touse.length - 1));
+				name = name + c;
+				if (cons.indexOf(c) != -1) consnum++;
+			}
+			name = name.charAt(0).toUpperCase() + name.substring(1, name.length)
+			return name;
+		}
+
+		function cli() {
+			var text = document.getElementById('cl').value
+			var a = text.split(" ")
+			var cmd = a[0]
+			var arg = a[1]
+			if(cmd=="join"){
+				changeRoom(arg)
+			}else if(cmd=="name"){
+				username = arg
+				socket.emit('changeName', { name: arg });
+				log("Теперь вы "+arg+"\n")
+			}else if(cmd=="list"){
+				socket.emit('roomList', {  });
+			}else if(cmd=="users"){
+				socket.emit('userList', {  });
+			}else{
+				socket.emit('chat', { msg: text });
+			}
+			document.getElementById('cl').value=""
+			return false
+		}
+
+		var currentRoom="";
+
+		var role=0; //0 - viewer, 1/2 - player
+		var field=[]
+		var isStarted=false
+		var username=randomName()
+		var prevTurn=1
+
+		function clearGameState() {
+			role=0
+			field=[]
+			isStarted=false
+
+			render()
+		}
+
+		function changeRoom(name) {
+			if(currentRoom!="") socket.emit('unsubscribe', { room: currentRoom });
+			socket.emit('subscribe', { room: name });
+			log("В комнате "+name+"\n")
+			currentRoom=name
+
+			clearGameState()
+		}
+
+		function roomList(data) {
+			log('\nСписок комнат:\n')
+			delete data[""];
+			for (var i in data) {
+				if (data.hasOwnProperty(i) && typeof(i) !== 'function') {
+					log(i+" ["+data[i]+"]\n")
+				}
+			}
+			log("\n")
+		}
+
+		var socket = io.connect('http://82.196.5.189');
+		socket.on('rooms', function (data) {
+			socket.emit('setName', { name: username });
+
+			delete data[""];
+
+			if(size(data)==0){
+				changeRoom("habraroom")
+			}else{
+				roomList(data)
+				var first
+				for (var i in data) {
+					if (data.hasOwnProperty(i) && typeof(i) !== 'function') {
+						first = i;
+						break;
+					}
+				}
+				changeRoom(first)
+			}
+			//socket.emit('my other event', { my: 'data' });
+		});
+
+		socket.on('chat',function (data) {
+			log(data.msg+"\n")
+		})
+
+		socket.on('roomList', roomList)
+
+		socket.on('updateField', function (data) {
+			field[data.a]=data.b
+			prevTurn=data.a
+			render()
+		})
+
+		socket.on('setField', function (data) {
+			field = data.field
+			isStarted = data.isStarted
+			role = 0
+			console.log("data.field")
+			console.log(data)
+			if(data.player1==username) {role = 1; log ("Вы - первый игрок\n")}
+			if(data.player2==username) {role = 2; log ("Вы - второй игрок\n")}
+			render()
+		})
+
+		function render(){
+			for (var i=1; i<=81; i++) {
+				var e = document.getElementById("cell"+i)
+				if(field[i]==1) e.setAttribute("class","cx") 
+				else if(field[i]==2) e.setAttribute("class","co") 
+				else e.setAttribute("class","")
+			}
+			var target = ((prevTurn-1) % 9) + 1
+			for (var i=1; i<=9; i++) {
+				var e = document.getElementById("field"+i)
+				if(i==target) e.setAttribute("class","active")  
+				else e.setAttribute("class","")
+			}
+		}
+
+		log("Команды: \njoin roomName - сменить комнату (создаётся если не существует)\nname username - сменить имя\nlist - список комнат\nusers - кто в комнате\nА ещё тут чат\n")
+		log("Ваше имя (рандомное, честно) - "+username+"\n")
+
+		var a = document.getElementsByTagName('td');
+		for (var i = 0; i < a.length; i++) {
+			a[i].onclick = function(e) {
+				var target = e.target || e.srcElement;
+				if(isStarted && role>0 && target.id.substr(0,4)=="cell"){
+					var id = target.id.substr(4, target.length)
+					socket.emit('makeStep', { id: id});
+				}
+			}
+
+			//if(rnd(1,2)==1) a[i].setAttribute("class","cx"); else a[i].setAttribute("class","co")
+		}
+
+	</script>
+
+	<form id="cli" onsubmit="cli(); return false;">
+		<input type=text id=cl>
+		<input type=submit value="ok">
+	</form>
+</body>
+</html>
